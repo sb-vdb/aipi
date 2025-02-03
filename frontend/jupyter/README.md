@@ -10,6 +10,8 @@ Use this frontend, if you want to develop or explore in more detail, as its' arc
 
 Since JupyterLab is based on Python, it requires a configured Python environment. For simplicity, all Python stuff is shared via a single maintained environment. So, if you haven't already, see the [Python Dependency](../../python-service/README.md) guide.
 
+Since the Jupyter Demo also accesses Ollama models, you'll also need a [running Ollama service](../../ollama-service/README.md).
+
 ## Start
 
 First, navigate to the top-level repo directory.
