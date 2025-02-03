@@ -22,7 +22,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 ## Start
 
-Whether you need to manually start you server as above depends on the system, you are installing Ollama on. Try ``ollama list`` to test.
+Whether you need to manually start you server depends on the system, you are installing Ollama on. Try ``ollama list`` to test.
 If an error comes up, proceed, otherwise, you're up and running
 
 Which command to use, to startup the Ollama server depends on whether you controlling the Raspi remotely via SSH:
