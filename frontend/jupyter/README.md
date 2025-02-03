@@ -21,14 +21,14 @@ source venv/bin/activate
 
 To start the server, run the following command:
 ```
-jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="demos"
+jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="frontend/jupyter"
 ```
 
 `--ip=0.0.0.0` enables the server to be addressed externally
 
 `--no-browser` prevents the server from opening a browser on-device
 
-`--notebook-dir="demos"` sets the folder "demos" as root project folder
+`--notebook-dir="frontend/jupyter"` sets the folder "frontend/jupyer" as root project folder in the IDE
 
 
 ## Use

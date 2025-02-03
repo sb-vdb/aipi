@@ -24,12 +24,20 @@ class TransformerStream(queue.Queue):
     def set_tokenizer(self, tokenizer):
         self.tokenizer = tokenizer
     
-    async def get_generator(self):
-        asyncio.sleep(0.2)
-        while self.running:
+    async def get_async_generator(self):
+        async def get_generator():
+            while self.running or not self.empty():
+                await asyncio.sleep(0.1)
+                yield json.dumps({
+                    "status": "generating",
+                    "token": self.get() if not self.empty() else None
+                }) + "\n"
             yield json.dumps({
-                "token": self.get() if not self.empty() else None
-            }) + "\n"
+                "status": "finished"
+            })
+        
+        async for message in get_generator():
+            yield message
 
 
 class DiffuserStream(queue.Queue):
@@ -72,35 +80,39 @@ class DiffuserStream(queue.Queue):
         img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
         return img_str
     
-    async def get_generator(self):
-        total_steps = self.get_total_steps()
-        start_time = time.time()
-        checkpoint = 0
-        step_time = time.time()
-        step = 0
-        seconds = 0
+    async def get_async_generator(self):
+        async def get_generator():
+            total_steps = self.get_total_steps()
+            start_time = time.time()
+            checkpoint = 0
+            step_time = time.time()
+            step = 0
+            seconds = 0
 
-        while step <= total_steps:
-            await asyncio.sleep(1)
-            now = time.time()
-            seconds += 1
-            buffer_image = self.get() if not self.empty() else None
-            total_elapsed = now - start_time
-            if buffer_image:
-                step += 1
-                step_time = now
-                checkpoint = total_elapsed
-                seconds = 0
+            while step <= total_steps:
+                await asyncio.sleep(1)
+                now = time.time()
+                seconds += 1
+                buffer_image = self.get() if not self.empty() else None
+                total_elapsed = now - start_time
+                if buffer_image:
+                    step += 1
+                    step_time = now
+                    checkpoint = total_elapsed
+                    seconds = 0
+                    
                 
-            
-            remaining = ((checkpoint / (step - 1)) * (total_steps - (step - 1)) - seconds) if step > 1 else None
-            
-            yield json.dumps({
-                "elapsed_step": int(now - step_time),
-                "elapsed_total": int(total_elapsed),
-                "remaining": int(remaining) if remaining else None,
-                "status": "init" if step == 0 else "generating" if step <= total_steps else "done",
-                "step": step,
-                "total_steps": total_steps,
-                "image": buffer_image
-            }) + "\n"
+                remaining = ((checkpoint / (step - 1)) * (total_steps - (step - 1)) - seconds) if step > 1 else None
+                
+                yield json.dumps({
+                    "elapsed_step": int(now - step_time),
+                    "elapsed_total": int(total_elapsed),
+                    "remaining": int(remaining) if remaining else None,
+                    "status": "generating" if step <= total_steps else "finished",
+                    "step": step,
+                    "total_steps": total_steps,
+                    "image": buffer_image
+                }) + "\n"
+
+        async for message in get_generator():
+            yield message
