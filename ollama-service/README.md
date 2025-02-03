@@ -58,7 +58,7 @@ Ollama models can be used with the provided Notebooks in this repo. To use the N
 
 Use this, if you want to explore more than just the varieties of Ollama models or want to stick to common data science workflows.
 
-After that, inside the Notebooks, a simple HTTP Request is sent, using standard Python libraries, and its result is used. Below is an example on how to use Python to communicate with Ollama: 
+After that, inside the Notebooks, a simple HTTP Request is sent, using standard Python libraries, and its result is used. Below is an example on how to use Python to communicate with Ollama (already included in Notebooks): 
 
 ```
 import requests     # standard Python library

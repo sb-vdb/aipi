@@ -1,12 +1,12 @@
 # Python Dependencies & HTTP Endpoint
 
-**PyTorch** is a library for Python that runs AI models on your machine. It is widely used for developing and training deep learning models. When used with libraries like Hugging Face's Diffusers, PyTorch enables efficient implementation and fine-tuning of state-of-the-art diffusion models for various applications such as image generation and natural language processing.
+**PyTorch** is a library for Python that runs AI models on your hardware.
 
-The **Diffusers** library, developed by Hugging Face, is a powerful tool for working with diffusion models, such as downloading and configuring them. Diffusion models are a type of generative model that can create data samples, such as images or text, by iteratively refining random noise into coherent outputs.
+**Diffusers**, developed by Hugging Face, is a library to manage and use its' Diffuser models (e.g. used for Image Generation).
 
-The **Transformers** library, also developed by Hugging Face, is a versatile tool for working with transformer models, which are a type of deep learning model particularly well-suited for natural language processing tasks. Transformers can perform a variety of tasks such as text classification, translation, summarization, and question answering by leveraging pre-trained models that can be fine-tuned for specific applications. The library provides an easy-to-use interface for downloading, training, and deploying these models, making it accessible for both research and production use cases.
+The **Transformers** library, is a pendant to ``Diffusers`` but for Transformers (e.g. used for generative Language Models)
 
-**Flask** is a good-old Python framework to create leightweight web APIs. We use it to receive web requests, containing a desired prompt to run locally through a model.
+**FastAPI** is a lightweight framework, that supersedes `Flask` in this repo, as `FastAPI` is working better with asynchronous streams. Both libraries provide a HTTP endpoint to send data to and receives responses from.
 
 While the dependencies are used by both the Jupyter Lab frontend and the Web frontend, they both use it differently. Jupyter Lab can use Python dependencies natively. But for the web frontend we need to wrap them into something accessible - in our case, an HTTP API.
 
@@ -36,6 +36,8 @@ pip install -r requirements.txt
 If everything succeeded up until this point, Jupyter and everything Python is ready to go.
 
 ## Start HTTP Endpoint
+
+You can skip this step, if you want to only use the Jupyter frontend, as the Python HTTP endpoint is only needed by the web frontend. 
 
 First, navigate to the top-level folder of the repo and activate your environment, if not already done:
 ```

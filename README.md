@@ -7,23 +7,37 @@ To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
 To setup und use the Demos, visit their respective README as linked below (or find them in their folder).
 
 ## Demos
+Aipi uses two ways to serve AI models. One is Ollama, a program that is repository client, model runner and API endpoint, all in one. The other is PyTorch, a Python framework being a defacto standard for AI ecosystems.
 
-### [Simple Chat](demos/chat/README.md)
-Provided via Ollama, there is a large range of language models, also with specializations like coding and multi-modal models, able to discuss images (and more) as input, provided along with a prompt. When an Ollama endpoint receives a request, it takes the requested model, sends the prompt through it and streams the result back token by token. Models tested are:
+Ollama proved to be very convenient to use out of the box and is well-populated with noteworthy models. However, Ollama only serves LMs and the choice is not exhaustive.
+
+### Simple Chat
+As we know it from ChatGPT: send a prompt text to it and receive a text back. On top of that, multi-modal models are able to process more than just input text. In our demo, ``Moondream`` may also be sent a picture and be asked a question about it.
+
+Ollama models tested:
 - Phi3-mini 3.8B
 - Llama3.2 7B
 - Codellama 7B
 - Moondream (multi-modal)
 - DeepSeek-r1 7B
   
-Working with PyTorch / Transformers:
-- LläMmlein 1B
+PyTorch:
+- LläMmlein 1B (Transformers library)
 
-### [Image Generation](demos/generate-images/README.md)
+### Image Generation
 Downsides first: 512x512px, hard-to-buy level of detail and about 30 minutes of runtime. But hey, just describe it and it serves it.
-Models tested are:
-- Stable Diffusion v1.5
 
+PyTorch:
+- Stable Diffusion v1.5 (Diffusers library)
+
+### Using the Demos
+
+#### [JupyterLab](frontend/jupyter/README.md)
+JupyterLab is web-based IDE that can be served right from the Raspi and accessed from the network. So you can open it on any device with a browser and work locally on the Raspi.
+For every demo, there are prepared Notebooks in this repo, so you can just check it out and modify stuff. 
+
+#### Web Frontend
+Since JupyterLab uses Python code that does a lot more than what is interesting to setup the Aipi demo, there is also a more streamlined UX via a web frontend, that is aimed to not do more than taking prompts and streaming results.
 
 ## Background
 When we want to use a model, we could:

@@ -38,9 +38,23 @@ This is why SSH server launch commands are appended a `&; disown` argument to. T
 
 ## Quick Shell Usage Intro
 
-The Demo guides are aimed to explicitely list all commands needed on top of navigating your system, so you don't need to find out how to properly configure all tools to reproduce the Demos of this repo. Automated scripts to setup environments that can be started locally on the desktop evironment, may follow. But, to retain reproduceability, using the command line is much more convenient, than using graphical interfaces.
+The Demo guides are aimed to explicitely list all commands needed, so you don't need to find out how to properly configure all tools to reproduce the Demos of this repo. Since targets of commands are all relative to the Repos top-folder: if you start there and follow the guides, everything should work without having to navigating any further than:
+```
+mkdir clones
+cd clones
+git clone https://github.com/sb-vdb/aipi.git
+cd aipi
+```
+These four commands do:
+1. create a directory `clones` (to keep things tidy)
+2. navigate to the new directory
+3. telling the ``git`` application to run its `clone` routine with the given URL as argument, which indeed clones the repo from the URL into a new directory with the repo's name
+4. navigate to the cloned repo's folder, which is called `aipi`
 
-Yet, in order to navigate and better be able to read listed commands, you should be familiar with basic command syntax and commands like `cd`, `mkdir` and `ls`. For a quick overview, see below:
+That should be it for navigating and using CLI-stuff apart from just copying commands from these guides. If you want to learn more about CLI basics, keep reading:
+
+---------------------
+(Optional)
 
 When talking about "navigate to ...", this comes down to the fact, that commands are always dispatched from a specific location. The current location is displayed on your current prompt line. Opening the terminal will usually start the session from your user folder.
 The common short symbol for that location is `~`. This is a shortcut to the location ``/home/<username>/``. The first `/` is actually a location, too: the very root-directory where everything resides. It's good style to use your user space, whenever possible. Besides, there are also relative symbols for referencing the current folder ( `.` ) and its parent folder ( `..` ). A path like `/home/my_user/my_directory` is navigated by the system step-by-step. After every `/`, the system is at that other location. So, putting relative symbols can create dynamic but also transparent paths. `/home/my_user/../my_user/../my_user/../my_user` is a valid path.
@@ -80,7 +94,7 @@ ls -l /home/my_user
 ls -la /home/my_user
 ```
 
-As mentioned, everything that comes after the program's name, is passed to the program. How these arguments are used, is completely up to the program. It's conventional that dashes `-` and double-dashes `--` are used to configure sort of optional things.
+As mentioned, everything that comes after the program's name, is passed on to the program. How these arguments are used, is completely up to the program. It's conventional that dashes `-` and double-dashes `--` are used to configure sort of optional things.
 Further, `-` indicates options with a single char name. Like `a` in `ls -a` is the short name of the option to list all files (also hidden dot-files). Since a single dash indicates single-char options, we can combine multiple such options into `-abcdefg` and all chars are interpreted individually. `--` indicate more verbose option names. Each option with a verbose name needs their own `--` prepended. For example, server launch commands are often given an IP address in the style `--ip=127.0.0.1`, or flagged for certain modes without an explicit value like `--debug`.
 
 Most commands support the `--help` command with nothing else to it. For example `cd --help` shows an overview about the syntax for using and configuring `cd`.
