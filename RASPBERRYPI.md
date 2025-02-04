@@ -22,6 +22,20 @@ In the next step of the installation process, you are asked to use a configurati
 If you use RaspbianOS, you have everything setup to continue with the further guides. If you use another Linux-based operating system, you need to make sure to have installed:
 - Python 3.10+
 - and Python-tooling such as ``pip`` and ``venv``
+- `dphys-swapfile` for large models, that don't fit inside the Raspi RAM
+
+## Configure
+Most things are configured through the applications used in the process. If you want to use large models with more than 7GB of weight sizes, we need to setup a swapfile. First we need to configure our swapfile:
+```
+sudo cp -f dphys-swapfile /etc/dphys-swapfile
+```
+This command takes the `dphys-swapfile` configuration file from this repo and copies it into `/etc/`, which is a root folder. So writing to it requires us to put `sudo` in front of the `cp` command to tell the system to run this command as root.
+We then need to make `dphys-swapfile` work:
+```
+sudo dphys-swapfile setup
+sudo dphys-swapfile swapon
+swapon
+```
 
 ## Using the Raspi over the Network
 If you setup user, network and ssh-server, you can basically just plug in the Raspi and never have it connected to a display or a keyboard ever. The SSH-server allows you to emulate a local console on any device that has network access to the Raspi, as if you would be using it on device.

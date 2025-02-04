@@ -6,13 +6,21 @@ To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
 
 To setup und use the Demos, visit their respective README as linked below (or find them in their folder).
 
+## Security Note
+This architecture lacks some security measures and should therefore only be run within trusted networks (e.g. home network), as this is for Demo purposes. Some improvements could be:
+- restrict the FastAPI CORS policies
+- restrict the Ollama service
+- restrict the JupyterLab service, use generated URL with access token with care
+- setup firewall on raspberry pi
+- setup key based SSH and disable password authentication on the Raspberry Pi
+
 ## Demos
 Aipi uses two ways to serve AI models. One is Ollama, a program that is repository client, model runner and API endpoint, all in one. The other is PyTorch, a Python framework being a defacto standard for AI ecosystems.
 
 Ollama proved to be very convenient to use out of the box and is well-populated with noteworthy models. However, Ollama only serves LMs and the choice is not exhaustive.
 
 ### Simple Chat
-As we know it from ChatGPT: send a prompt text to it and receive a text back. On top of that, multi-modal models are able to process more than just input text. In our demo, ``Moondream`` may also be sent a picture and be asked a question about it.
+As we know it from ChatGPT: send a prompt text to it and receive a text back. On top of that, multi-modal models are able to process more than just input text. In our demo, ``Moondream`` may also be used to discuss images.
 
 Ollama models tested:
 - Phi3-mini 3.8B
@@ -44,7 +52,7 @@ When we want to use a model, we could:
 - use a hosted runtime of a model somewhere in the internet
 - or locally spin up the runtime ourselves
 
-If we want to use big models with great performance, we mostly have to use hosted runtimes, as we can not provide the necessary resources on a typical local system (with bigger models taking some dozens of Gigabytes to be loaded at the same time). The size of the model is a hard limitation for a smooth AI experience. To conveniently provide a >100bn parameter model, you would need a system that drastically scales GPU memory and power per user. [Adding neural processing power to the Raspi](https://www.raspberrypi.com/products/ai-kit/) improves execution performance, but does not enhance possibilities.
+If we want to use big models with great performance, we mostly have to use hosted runtimes, as we can not provide the necessary resources on a typical local system (with bigger models taking some dozens of Gigabytes to be loaded at the same time). The size of the model is a hard limitation for a smooth AI experience. To conveniently provide a >100bn parameter model, you would need big GPUs that scale well per user. [Adding neural processing power to the Raspi](https://www.raspberrypi.com/products/ai-kit/) improves execution performance, but does not enhance possibilities.
 
 The other side of the story is, that we have been talking about full-fledged general models. Within more specialized use cases, models that can suffice may be crucially smaller than general models with comparable quality. At the same time, edge devices become more and more performant, with a Raspberry Pi 5 being as swift as a contemporary smartphone. And with 8 GB of RAM, there is already quite a choice of models, that are not just a waste of time.
 
