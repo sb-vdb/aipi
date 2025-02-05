@@ -1,18 +1,6 @@
-# Python Dependencies & HTTP Endpoint
+# Install
 
-**PyTorch** is a library for Python that runs AI models on your hardware.
-
-**Diffusers**, developed by Hugging Face, is a library to manage and use its' Diffuser models (e.g. used for Image Generation).
-
-The **Transformers** library, is a pendant to ``Diffusers`` but for Transformers (e.g. used for generative Language Models)
-
-**FastAPI** is a lightweight framework, that supersedes `Flask` in this repo, as `FastAPI` is working better with asynchronous streams. Both libraries provide a HTTP endpoint to send data to and receives responses from.
-
-While the dependencies are used by both the Jupyter Lab frontend and the Web frontend, they both use it differently. Jupyter Lab can use Python dependencies natively. But for the web frontend we need to wrap them into something accessible - in our case, an HTTP API.
-
-## Install Dependencies
-
-If you followed the Jupyter-frontend guide, you were already guided here. If you followed these steps, then you do not need to repeat this.
+## Install Python Dependencies
 
 In Python, dependencies must be pre-installed at a location, that can be found by the Python Runtime (sounds logical, but is not trivial). For this, we will use a virtual environment, which is basically a created directory with a Python copy in a specific version and all Python-dependencies (we need) installed next to it. With this, we can retain an isolated environment that is not affected by system-wide uses of Python. At the same time, when activating this environment, our Shell will act like this is the default system Python - hence, allows us to use our specific Python version with the `python3` command, without providing a path to the specific environment's python executable. We will use Python's `venv` module to create such an environment.
 
@@ -35,19 +23,16 @@ pip install -r requirements.txt
 ```
 If everything succeeded up until this point, Jupyter and everything Python is ready to go.
 
-## Start HTTP Endpoint
 
-You can skip this step, if you want to only use the Jupyter frontend, as the Python HTTP endpoint is only needed by the web frontend. 
+## Install Ollama
+According to this [Issue](https://github.com/ollama/ollama/issues/7733), there is a bug in newer versions of Ollama, that prevents you from running multi-modal models with image input efficiently (enough) on a Raspberry Pi.
 
-First, navigate to the top-level folder of the repo and activate your environment, if not already done:
+If you want to use image inputs as well, you have to install a specific version. Version 0.3.9 works fine for all the demos of this repo:
 ```
-source venv/bin/activate
+curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.3.9 sh
 ```
 
-To now run the server:
+Otherwise, you may just install the newest version:
 ```
-python3 python-service/src/service.py
-
-// if started via SSH
-python3 python-service/src/service.py &; disown
+curl -fsSL https://ollama.com/install.sh | sh
 ```

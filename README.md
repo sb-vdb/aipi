@@ -2,17 +2,7 @@
 
 This repository showcases AI model deployments on a Raspberry Pi 5 using Ollama and JupyterLab with PyTorch. Both platforms allow remote interaction with models running on the Raspberry Pi.
 
-To setup the Raspberry Pi, [go here](RASPBERRYPI.md). 
-
-To setup und use the Demos, visit their respective README as linked below (or find them in their folder).
-
-## Security Note
-This architecture lacks some security measures and should therefore only be run within trusted networks (e.g. home network), as this is for Demo purposes. Some improvements could be:
-- restrict the FastAPI CORS policies
-- restrict the Ollama service
-- restrict the JupyterLab service, use generated URL with access token with care
-- setup firewall on raspberry pi
-- setup key based SSH and disable password authentication on the Raspberry Pi
+To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
 
 ## Demos
 Aipi uses two ways to serve AI models. One is Ollama, a program that is repository client, model runner and API endpoint, all in one. The other is PyTorch, a Python framework being a defacto standard for AI ecosystems.
@@ -23,8 +13,8 @@ Ollama proved to be very convenient to use out of the box and is well-populated 
 As we know it from ChatGPT: send a prompt text to it and receive a text back. On top of that, multi-modal models are able to process more than just input text. In our demo, ``Moondream`` may also be used to discuss images.
 
 Ollama models tested:
-- Phi3-mini 3.8B
-- Llama3.2 7B
+- Phi3 3.8B
+- Llama3.2 3.8B
 - Codellama 7B
 - Moondream (multi-modal)
 - DeepSeek-r1 7B
@@ -37,15 +27,70 @@ Downsides first: 512x512px, hard-to-buy level of detail and about 30 minutes of 
 
 PyTorch:
 - Stable Diffusion v1.5 (Diffusers library)
+- SDXL-Turbo (Diffusers library)
 
-### Using the Demos
+## Setup
+See here, on how to [install the dependencies](./INSTALL.md)
 
-#### [JupyterLab](frontend/jupyter/README.md)
-JupyterLab is web-based IDE that can be served right from the Raspi and accessed from the network. So you can open it on any device with a browser and work locally on the Raspi.
-For every demo, there are prepared Notebooks in this repo, so you can just check it out and modify stuff. 
+## Start Services
+If you have setup the services (Ollama and JupyterLab), you still need to run them:
 
-#### Web Frontend
-Since JupyterLab uses Python code that does a lot more than what is interesting to setup the Aipi demo, there is also a more streamlined UX via a web frontend, that is aimed to not do more than taking prompts and streaming results.
+### Start ``Ollama``
+Which commands to use, to startup the Ollama server depends on whether you controlling the Raspi remotely via SSH:
+
+```
+// from SSH connected to the Raspi
+ollama serve &
+disown
+
+// locally from the Raspi
+ollama serve
+```
+
+### Start ``JupyterLab``
+First, navigate to the top-level repo directory.
+
+Then, activate the shared Python environment:
+```
+source venv/bin/activate
+```
+
+To start the server, run the following command:
+```
+jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="frontend/jupyter"
+
+// from SSH connected to the Raspi
+jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="frontend/jupyter" &
+disown
+```
+
+`--ip=0.0.0.0` enables the server to be addressed externally
+
+`--no-browser` prevents the server from opening a browser on-device
+
+`--notebook-dir="frontend/jupyter"` sets the folder "frontend/jupyer" as root project folder in the IDE
+
+After you run one of the startup-commands, you cann see the process' output in the Terminal. Wait until it displays the URLs you can use to access the IDE via the Browser. Take the one with the device name, that you gave during the Raspis setup, inside the URL.
+
+## Alternative ways to interact with Ollama only
+Ollama is already well-integrated into common environments. For classic desktops we can use `Chatboxai` for a full-fledged chat experience and in the Terminal we can have a text dialogue via ``Ollama`` itself.
+
+### Use ``Chatboxai``
+See website: https://www.chatboxai.app/en
+Chatboxai is a local desktop application that supports a range of AI-APIs, most natively the OpenAI API. It also supports the Ollama-API, so you can just pass it your Ollama Service-URL in the App's settings.
+
+### Use CLI
+You can run any model available with a simple Ollama command, either just with a single prompt, or interactively awaiting prompts until you close it:
+
+```
+// Single prompt with a single result
+ollama run "phi3-mini" "why is the sky blue"
+```
+
+```
+// Interactive mode 
+ollama run "phi3-mini"
+```
 
 ## Background
 When we want to use a model, we could:
