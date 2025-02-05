@@ -65,7 +65,7 @@ class DiffuserStream:
         now = time.time()
         self.total_elapsed = now - self.start_time
         self.step_elapsed = now - self.checkpoint
-        self.remaining = ((self.start_time - self.checkpoint / (self.step - 1)) * (self.total_steps - (self.step - 1)) - self.step_elapsed) if self.step > (self.step + 1) else None
+        self.remaining = ((self.start_time - self.checkpoint / (self.step - 1)) * (self.total_steps - (self.step - 1)) - self.step_elapsed) if self.step > (self.init_step + 1) else None
         self.checkpoint = time.time()
         latents = callback_kwargs["latents"]
         image = self.latents_to_rgb(latents[0])
@@ -74,11 +74,11 @@ class DiffuserStream:
         html = HTML(f"""
            <div style="display: flex; flex-direction: row">
               <img src=\"{img_b64}\" width=\"150px\" height=\"150px\"/>
-              <div style="margin-left: 20px;">
+              <div style="margin-left: 20px; margin-top: 5px; font-family: monospace">
                   <p>Step {self.step}/{self.total_steps}</p>
                   <p>Time elapsed (total): {get_time_str(self.total_elapsed)}</p>
                   <p>Time elapsed (last step): {get_time_str(self.step_elapsed) if self.step_elapsed else 'na' }</p>
-                  <p>Time remaining (total): {(get_time_str(self.remaining) if self.remaining else 'na')}"</p>
+                  <p>Time remaining (total): {(get_time_str(self.remaining) if self.remaining else 'na')}</p>
               </div>
             </div>
         """)

@@ -40,8 +40,7 @@ Which commands to use, to startup the Ollama server depends on whether you contr
 
 ```
 // from SSH connected to the Raspi
-ollama serve &
-disown
+ollama serve & disown
 
 // locally from the Raspi
 ollama serve
@@ -57,11 +56,10 @@ source venv/bin/activate
 
 To start the server, run the following command:
 ```
-jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="frontend/jupyter"
+jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="jupyter"
 
 // from SSH connected to the Raspi
-jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="frontend/jupyter" &
-disown
+jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="jupyter" & disown
 ```
 
 `--ip=0.0.0.0` enables the server to be addressed externally
