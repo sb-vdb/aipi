@@ -23,7 +23,8 @@ PyTorch:
 - LläMmlein 1B (Transformers library)
 
 ### Image Generation
-Downsides first: 512x512px, hard-to-buy level of detail and about 30 minutes of runtime. But hey, just describe it and it serves it.
+Two typical text-to-image pipelines; with SDXL-Turbo demonstrating how some models bigger than the Raspberry Pi 5's RAM can be hacked to run.
+512x512px, SDv1.5 runs 30 minutes (50 denoising steps) and the SDXL runs about 2 hours.
 
 PyTorch:
 - Stable Diffusion v1.5 (Diffusers library)
