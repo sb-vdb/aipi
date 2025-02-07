@@ -55,7 +55,7 @@ class DiffuserStream:
         # helper function that makes time-strings like 24:59:59 or 01:01:01
         def get_time_str(total_seconds):
             def get_digits(number):
-                return f"0{number}" if number < 10 else f"{number}"
+                return f"0{int(number)}" if number < 10 else f"{int(number)}"
             total_seconds = total_seconds
             days = total_seconds // (24 * 3600)
             remaining_seconds = total_seconds % (24 * 3600)
