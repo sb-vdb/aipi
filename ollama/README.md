@@ -18,7 +18,6 @@ The `FROM` instruction tells ollama what base model to use, the `PARAMETER` of `
 
 #### Create Custom Model from Modelfile
 ```
-// ollama needs you to be at the Modelfile's location
 ollama create -f <path to your Modelfile> <name of your custom model>
 
 // use model
