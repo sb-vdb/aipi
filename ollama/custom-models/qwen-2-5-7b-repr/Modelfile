@@ -1,0 +1,2 @@
+FROM qwen2.5
+PARAMETER temperature 0

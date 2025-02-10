@@ -18,8 +18,10 @@ Ollama models tested:
 - Codellama 7B
 - Moondream (multi-modal)
 - DeepSeek-r1 7B
+
+Ollama models may also be customized and derived into [custom models](ollama/README.md). A common use case is to configure a model (temperature = 0) to only produce predictable outputs.
   
-PyTorch:
+PyTorch models tested:
 - LläMmlein 1B (Transformers library)
 
 ### Image Generation
