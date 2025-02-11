@@ -26,12 +26,12 @@ If you use RaspbianOS, you have everything setup to continue with the further gu
 
 ## Configure
 Most things are configured through the applications used in the process. If you want to use large models with more than 7GB of weight sizes, we need to setup a swapfile. First we need to configure our swapfile:
-```
+```bash
 sudo cp -f dphys-swapfile /etc/dphys-swapfile
 ```
 This command takes the `dphys-swapfile` configuration file from this repo and copies it into `/etc/`, which is a root folder. So writing to it requires us to put `sudo` in front of the `cp` command to tell the system to run this command as root.
 We then need to make `dphys-swapfile` work:
-```
+```bash
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
 swapon
