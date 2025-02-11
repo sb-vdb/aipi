@@ -31,9 +31,9 @@ PyTorch:
 - SDXL-Turbo (Diffusers library)
 
 # Guide
-Below here are all paragraphs and related articles that are needed to run this demo on a Raspberry Pi
+First, you need to setup the Raspberry Pi, [go here](RASPBERRYPI.md) to walk through the steps.
 
-To get started, clone this repo and go into the cloned directory with your command line:
+Once the Raspberry Pi is set up, clone this repo and go into the cloned directory with your command line:
 ```
 git clone https://github.com/sb-vdb/aipi.git
 cd aipi
@@ -41,11 +41,8 @@ cd aipi
 
 All commands in this guide are written to be run from that project folder (on its top-level). As long as you do not navigate somewhere else, everything should work properly. Otherwise, make sure you are always in `aipi` directory (no sub folder) when running a command from the guide (except for `ollama` commands which can be run anywhere).
 
-## Setup
-
-To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
-
-See here, on how to [install the dependencies](./INSTALL.md)
+## Setup Dependencies
+See here, on how to [install the dependencies](./INSTALL.md) for the Python libraries and Ollama.
 
 ## Start Services
 If you have setup the services (Ollama and JupyterLab), you still need to run them:
