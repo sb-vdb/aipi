@@ -2,8 +2,6 @@
 
 This repository showcases AI model deployments on a Raspberry Pi 5 using Ollama and JupyterLab with PyTorch. Both platforms allow remote interaction with models running on the Raspberry Pi.
 
-To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
-
 ## Demos
 Aipi uses two ways to serve AI models. One is Ollama, a program that is repository client, model runner and API endpoint, all in one. The other is PyTorch, a Python framework being a defacto standard for AI ecosystems.
 
@@ -17,7 +15,7 @@ Ollama models tested:
 - Llama3.2 3.8B
 - Codellama 7B
 - Moondream (multi-modal)
-- DeepSeek-r1 7B
+- DeepSeek-r1 8B
 
 Ollama models may also be customized and derived into [custom models](ollama/README.md). A common use case is to configure a model (temperature = 0) to only produce predictable outputs.
   
@@ -32,7 +30,21 @@ PyTorch:
 - Stable Diffusion v1.5 (Diffusers library)
 - SDXL-Turbo (Diffusers library)
 
+# Guide
+Below here are all paragraphs and related articles that are needed to run this demo on a Raspberry Pi
+
+To get started, clone this repo and go into the cloned directory with your command line:
+```
+git clone https://github.com/sb-vdb/aipi.git
+cd aipi
+```
+
+All commands in this guide are written to be run from that project folder (on its top-level). As long as you do not navigate somewhere else, everything should work properly. Otherwise, make sure you are always in `aipi` directory (no sub folder) when running a command from the guide (except for `ollama` commands which can be run anywhere).
+
 ## Setup
+
+To setup the Raspberry Pi, [go here](RASPBERRYPI.md).
+
 See here, on how to [install the dependencies](./INSTALL.md)
 
 ## Start Services
@@ -50,9 +62,7 @@ ollama serve
 ```
 
 ### Start ``JupyterLab``
-First, navigate to the top-level repo directory.
-
-Then, activate the shared Python environment:
+If not activated already, activate the shared Python environment:
 ```
 source venv/bin/activate
 ```
@@ -69,9 +79,9 @@ jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="jupyter" & disown
 
 `--no-browser` prevents the server from opening a browser on-device
 
-`--notebook-dir="frontend/jupyter"` sets the folder "frontend/jupyer" as root project folder in the IDE
+`--notebook-dir="jupyter"` sets the folder "jupyter" as root project folder in the IDE
 
-After you run one of the startup-commands, you cann see the process' output in the Terminal. Wait until it displays the URLs you can use to access the IDE via the Browser. Take the one with the device name, that you gave during the Raspis setup, inside the URL.
+After you run one of the startup-commands, you can see the process' output in the Terminal. Wait until it displays the URLs you can use to access the IDE via the Browser. Take the one with the device name, that you gave during the Raspis setup, inside the URL.
 
 ## Alternative ways to interact with Ollama only
 Ollama is already well-integrated into common environments. For classic desktops we can use `Chatboxai` for a full-fledged chat experience and in the Terminal we can have a text dialogue via ``Ollama`` itself.

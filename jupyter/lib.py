@@ -7,7 +7,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 import torch
-from IPython.display import display, HTML
+from IPython.display import display, HTML, JSON
 
 ##############################################################################################################################
 # For PyTorch
@@ -159,6 +159,8 @@ def extract_responses(response, history=False):
     for item in response.text.split("\n"):
         if item.endswith("}"):
             obj = json.loads(agg + item)
+            if obj.get("error"):
+                print("Error sending prompt. While Ollama seems to run, the model probably could not be found.")
             record = obj.get("message").get("content") if history else obj.get("response")
             if obj.get("done"):
                 text += f"\n Query Data:\n{record}"
@@ -206,3 +208,15 @@ def to_message(role, text, image=None, images=None):
     elif images:
         msg["images"] = images
     return msg
+
+def check_model(url, name):
+    response = requests.post(f"{url}/show", json={"model": name})
+    jsn = json.loads(response.text)
+    display(JSON({
+        "details": jsn.get("details"),
+        "model_info": jsn.get("model_info")
+    }))
+
+def list_models(url):
+    response = requests.get(f"{url}/tags")
+    display(JSON(json.loads(response.text)))

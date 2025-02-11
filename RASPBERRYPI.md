@@ -3,7 +3,7 @@
 This document guides through the basic setup of the system and how to use it remotely.
 
 ## Hardware
-For most Demos, the bare Raspberry Pi 5 ("Raspi") is fine to use. For using the camera-based Demo, however, you need extra hardware. There are cameras and also [AI-accelerator kits](https://www.raspberrypi.com/products/ai-hat/) that are optimized for the Raspi.
+For most Demos, the bare Raspberry Pi 5 ("Raspi") is fine to use. For using a camera-based model use case, however, you need extra hardware. There are cameras and also [AI-accelerator kits](https://www.raspberrypi.com/products/ai-hat/) that are optimized for the Raspi.
 
 ## Operating System
 Since the Raspis storage is a removable SD-card, you can just use another device that can write SD-cards, to install an operating system on it. I recommend using the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) for the complete setup of the OS.
@@ -48,7 +48,7 @@ with `user` and `device_name` according to what you used during the installation
 
 There is one limitation to operating the Raspi via SSH. When you start a server application (like Ollama), it is started from within your shell (inside SSH client) and lives for as long the client lives. Without handling, after a time of idle, unfortunately, the connection will be terminated automatically, with the server application being shutdown with it.
 
-This is why SSH server launch commands are appended a `&; disown` argument to. This detaches the process from the SSH client.
+This is why SSH server launch commands are appended a `& disown` argument to. This detaches the process from the SSH client.
 
 ## Quick Shell Usage Intro
 
@@ -65,7 +65,7 @@ These four commands do:
 3. telling the ``git`` application to run its `clone` routine with the given URL as argument, which indeed clones the repo from the URL into a new directory with the repo's name
 4. navigate to the cloned repo's folder, which is called `aipi`
 
-That should be it for navigating and using CLI-stuff apart from just copying commands from these guides. If you want to learn more about CLI basics, keep reading:
+That should be it for navigating and using CLI-stuff apart from just copying commands from these guides. If you want to learn more about CLI basics, keep reading - or go back to the **[aipi Guide](README.md#setup)**
 
 ---------------------
 (Optional)
