@@ -41,7 +41,7 @@ swapon
 If you setup user, network and ssh-server, you can basically just plug in the Raspi and never have it connected to a display or a keyboard ever. The SSH-server allows you to emulate a local console on any device that has network access to the Raspi, as if you would be using it on device.
 
 Open a console (works for both Windows and Linux), and run:
-```
+```bash
 ssh <user>@<device_name>
 ```
 with `user` and `device_name` according to what you used during the installation of the Operating System. After successful connection, you are asked for your password. After logging in, you can use a shell just like locally.
@@ -53,7 +53,7 @@ This is why SSH server launch commands are appended a `& disown` argument to. Th
 ## Quick Shell Usage Intro
 
 The Demo guides are aimed to explicitely list all commands needed, so you don't need to find out how to properly configure all tools to reproduce the Demos of this repo. Since targets of commands are all relative to the Repos top-folder: if you start there and follow the guides, everything should work without having to navigating any further than:
-```
+```bash
 mkdir clones
 cd clones
 git clone https://github.com/sb-vdb/aipi.git
@@ -79,32 +79,32 @@ The probably most used command out there is `cd` for changing the directory. `cd
 
 `cd` is mainly used to navigate to paths that you name: 
 
-```
-cd some_subfolder       // relative without prepending "/"
+```bash
+cd some_subfolder       # relative without prepending "/"
 
-cd /home/my_user        // absolute with prepending "/"
-cd ~                    // shortcut symbol for user space
-cd                      // leave blank to also go to user space
-cd -                    // go to previously visited location
+cd /home/my_user        # absolute with prepending "/"
+cd ~                    # shortcut symbol for user space
+cd                      # leave blank to also go to user space
+cd -                    # go to previously visited location
 ```
 
 Creating a directory can be done with `mkdir <name-of-directory>`.
 
 Using `ls` to list files:
-```
-// display contents of current folder
+```bash
+# display contents of current folder
 ls
 
-// display contents of an explicit path
+# display contents of an explicit path
 ls /home/my_user
 
-// include hidden files
+# include hidden files
 ls -a /home/my_user
 
-// list-style
+# list-style
 ls -l /home/my_user
 
-// both features
+# both features
 ls -la /home/my_user
 ```
 

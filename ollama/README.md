@@ -17,15 +17,15 @@ The `FROM` instruction tells ollama what base model to use, the `PARAMETER` of `
 
 
 #### Create Custom Model from Modelfile
-```
+```bash
 ollama create -f <path to your Modelfile> <name of your custom model>
 
-// use model
+# use model
 ollama run <name of your custom model>
 ```
 
 Example:
-```
+```bash
 ollama create -f ollama/custom-models/qwen-2-5-7b-repr/Modelfile qwen2.5-7b-repr
 
 ollama run qwen2.5-7b-repr

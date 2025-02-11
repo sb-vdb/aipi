@@ -34,7 +34,7 @@ PyTorch:
 First, you need to setup the Raspberry Pi, [go here](RASPBERRYPI.md) to walk through the steps.
 
 Once the Raspberry Pi is set up, clone this repo and go into the cloned directory with your command line:
-```
+```bash
 git clone https://github.com/sb-vdb/aipi.git
 cd aipi
 ```
@@ -50,25 +50,25 @@ If you have setup the services (Ollama and JupyterLab), you still need to run th
 ### Start ``Ollama``
 Which commands to use, to startup the Ollama server depends on whether you controlling the Raspi remotely via SSH:
 
-```
-// from SSH connected to the Raspi
+```bash
+# from SSH connected to the Raspi
 ollama serve & disown
 
-// locally from the Raspi
+# locally from the Raspi
 ollama serve
 ```
 
 ### Start ``JupyterLab``
 If not activated already, activate the shared Python environment:
-```
+```bash
 source venv/bin/activate
 ```
 
 To start the server, run the following command:
-```
+```bash
 jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="jupyter"
 
-// from SSH connected to the Raspi
+# from SSH connected to the Raspi
 jupyter-lab --ip=0.0.0.0 --no-browser --notebook-dir="jupyter" & disown
 ```
 
@@ -90,13 +90,13 @@ Chatboxai is a local desktop application that supports a range of AI-APIs, most 
 ### Use CLI
 You can run any model available with a simple Ollama command, either just with a single prompt, or interactively awaiting prompts until you close it:
 
-```
-// Single prompt with a single result
+```bash
+# Single prompt with a single result
 ollama run "phi3-mini" "why is the sky blue"
 ```
 
-```
-// Interactive mode 
+```bash
+# Interactive mode 
 ollama run "phi3-mini"
 ```
 
